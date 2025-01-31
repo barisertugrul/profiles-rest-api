@@ -13,13 +13,16 @@ locale-gen en_GB.UTF-8
 # Install Python, SQLite and pip
 echo "Installing dependencies..."
 apt-get update
-apt-get install -y python3-dev python3-venv sqlite python-pip supervisor nginx git
+apt-get install -y python3-dev python3-venv sqlite3 python3-pip supervisor nginx git
 
+# Create project directory and clone the repository
 mkdir -p $PROJECT_BASE_PATH
 git clone $PROJECT_GIT_URL $PROJECT_BASE_PATH
 
+# Set up Python virtual environment
 python3 -m venv $PROJECT_BASE_PATH/env
 
+# Install Python dependencies
 $PROJECT_BASE_PATH/env/bin/pip install -r $PROJECT_BASE_PATH/requirements.txt uwsgi==2.0.21
 
 # Run migrations
